@@ -39,7 +39,7 @@ namespace War3Net.IO.Slk
             var bLine = lines.FirstOrDefault(x => x.StartsWith("B;", StringComparison.InvariantCultureIgnoreCase));
             if (!string.IsNullOrWhiteSpace(bLine))
             {
-                var parts = bLine.Split(';');
+                var parts = bLine.Split(';', StringSplitOptions.TrimEntries);
                 foreach (var part in parts)
                 {
                     if (part.StartsWith("X", StringComparison.InvariantCultureIgnoreCase))
@@ -186,7 +186,7 @@ namespace War3Net.IO.Slk
             {
                 return false;
             }
-            else if (string.Equals(value, "#VALUE!", StringComparison.Ordinal) || string.Equals(value, "#REF!", StringComparison.Ordinal))
+            else if (string.Equals(value, "#VALUE!", StringComparison.Ordinal) || string.Equals(value, "#REF!", StringComparison.Ordinal) || string.IsNullOrEmpty(value))
             {
                 return 0;
             }
