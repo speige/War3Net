@@ -175,14 +175,6 @@ namespace War3Net.IO.Slk
 
                 return value.Substring(1, value.Length - 2);
             }
-            else if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var intValue))
-            {
-                return intValue;
-            }
-            else if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var floatValue))
-            {
-                return floatValue;
-            }
             else if (string.Equals(value, bool.TrueString, StringComparison.OrdinalIgnoreCase))
             {
                 return true;
@@ -194,6 +186,14 @@ namespace War3Net.IO.Slk
             else if (string.Equals(value, "#VALUE!", StringComparison.Ordinal) || string.Equals(value, "#REF!", StringComparison.Ordinal) || string.IsNullOrEmpty(value))
             {
                 return 0;
+            }
+            else if (int.TryParse("0" + value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var intValue))
+            {
+                return intValue;
+            }
+            else if (float.TryParse("0" + value, NumberStyles.Float, CultureInfo.InvariantCulture, out var floatValue))
+            {
+                return floatValue;
             }
 
             return null;
