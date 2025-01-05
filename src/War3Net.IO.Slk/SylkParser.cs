@@ -11,14 +11,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace War3Net.IO.Slk
 {
     public sealed class SylkParser
     {
-        private static readonly Regex _splitBySemicolon = new Regex(@";(?=(?:[^""]*""[^""]*"")*[^""]*$)", RegexOptions.Compiled);
-
         public SylkTable Parse(Stream input, bool leaveOpen = false)
         {
             var lines = new List<string>();
@@ -107,7 +104,7 @@ namespace War3Net.IO.Slk
                     int? y = null;
                     object value = null;
 
-                    var parts = SplitSylkLine(line);
+                    var parts = line.Split(";", StringSplitOptions.TrimEntries);
                     foreach (var part in parts)
                     {
                         if (part.StartsWith("X", StringComparison.InvariantCultureIgnoreCase))
@@ -169,8 +166,13 @@ namespace War3Net.IO.Slk
 
         private object ParseValueString(string value)
         {
-            if (value.StartsWith('"') && value.EndsWith('"'))
+            if (value.StartsWith('"'))
             {
+                if (!value.EndsWith('"'))
+                {
+                    value = value + "\"";
+                }
+
                 return value.Substring(1, value.Length - 2);
             }
             else if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var intValue))
@@ -197,11 +199,6 @@ namespace War3Net.IO.Slk
             {
                 throw new NotSupportedException($"Unable to parse value '{value}'. Can only parse strings, integers, floats, and booleans.");
             }
-        }
-
-        private List<string> SplitSylkLine(string line)
-        {
-            return _splitBySemicolon.Split(line).ToList();
         }
     }
 }
