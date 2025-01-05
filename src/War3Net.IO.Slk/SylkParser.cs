@@ -17,6 +17,8 @@ namespace War3Net.IO.Slk
 {
     public sealed class SylkParser
     {
+        private static readonly Regex _splitBySemicolon = new Regex(@";(?=(?:[^""]*""[^""]*"")*[^""]*$)", RegexOptions.Compiled);
+
         public SylkTable Parse(Stream input, bool leaveOpen = false)
         {
             var lines = new List<string>();
@@ -197,10 +199,9 @@ namespace War3Net.IO.Slk
             }
         }
 
-        private static Regex _splitBySemicolon = new Regex(@";(?=(?:[^""]*""[^""]*"")*[^""]*$)", RegexOptions.Compiled);
         private List<string> SplitSylkLine(string line)
         {
-            return _splitBySemicolon.Matches(line).Select(m => m.Value).ToList();
+            return _splitBySemicolon.Split(line).ToList();
         }
     }
 }
