@@ -195,10 +195,8 @@ namespace War3Net.IO.Slk
             {
                 return 0;
             }
-            else
-            {
-                throw new NotSupportedException($"Unable to parse value '{value}'. Can only parse strings, integers, floats, and booleans.");
-            }
+
+            return null;
         }
     }
 }
