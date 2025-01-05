@@ -11,6 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace War3Net.IO.Slk
 {
@@ -104,7 +105,7 @@ namespace War3Net.IO.Slk
                     int? y = null;
                     object value = null;
 
-                    var parts = line.Split(';');
+                    var parts = SplitSylkLine(line);
                     foreach (var part in parts)
                     {
                         if (part.StartsWith("X", StringComparison.InvariantCultureIgnoreCase))
@@ -194,6 +195,12 @@ namespace War3Net.IO.Slk
             {
                 throw new NotSupportedException($"Unable to parse value '{value}'. Can only parse strings, integers, floats, and booleans.");
             }
+        }
+
+        private static Regex _splitBySemicolon = new Regex(@";(?=(?:[^""]*""[^""]*"")*[^""]*$)", RegexOptions.Compiled);
+        private List<string> SplitSylkLine(string line)
+        {
+            return _splitBySemicolon.Matches(line).Select(m => m.Value).ToList();
         }
     }
 }
