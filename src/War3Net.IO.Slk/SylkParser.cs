@@ -187,11 +187,19 @@ namespace War3Net.IO.Slk
             {
                 return 0;
             }
-            else if (int.TryParse("0" + value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var intValue))
+            else if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var intValue))
             {
                 return intValue;
             }
-            else if (float.TryParse("0" + value, NumberStyles.Float, CultureInfo.InvariantCulture, out var floatValue))
+            else if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var floatValue))
+            {
+                return floatValue;
+            }
+            else if (int.TryParse("0" + value, NumberStyles.Integer, CultureInfo.InvariantCulture, out intValue))
+            {
+                return intValue;
+            }
+            else if (float.TryParse("0" + value, NumberStyles.Float, CultureInfo.InvariantCulture, out floatValue))
             {
                 return floatValue;
             }
