@@ -32,10 +32,10 @@
   <PropertyGroup>
     <TfmGroupDotNet>net5.0</TfmGroupDotNet>
     <TfmGroupDotNetWindows>net5.0;net5.0-windows</TfmGroupDotNetWindows>
-    <War3NetBuildVersion>5.8.1</War3NetBuildVersion>
-    <War3NetBuildCoreVersion>5.8.1</War3NetBuildCoreVersion>
+    <War3NetBuildVersion>5.8.2</War3NetBuildVersion>
+    <War3NetBuildCoreVersion>5.8.2</War3NetBuildCoreVersion>
     <War3NetCodeAnalysisVersion>5.8.0</War3NetCodeAnalysisVersion>
-    <War3NetCodeAnalysisDecompilersVersion>5.8.1</War3NetCodeAnalysisDecompilersVersion>
+    <War3NetCodeAnalysisDecompilersVersion>5.8.2</War3NetCodeAnalysisDecompilersVersion>
     <War3NetCodeAnalysisJassVersion>5.8.0</War3NetCodeAnalysisJassVersion>
     <War3NetCodeAnalysisTranspilersVersion>5.8.0</War3NetCodeAnalysisTranspilersVersion>
     <War3NetCodeAnalysisVJassVersion>0.1.0</War3NetCodeAnalysisVJassVersion>
